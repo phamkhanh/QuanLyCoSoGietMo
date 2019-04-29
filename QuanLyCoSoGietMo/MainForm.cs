@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuanLyCoSoGietMo.AppForm;
+using QuanLyCoSoGietMo.AppSupport;
+using System;
 using System.Windows.Forms;
 
 namespace QuanLyCoSoGietMo
@@ -19,20 +14,24 @@ namespace QuanLyCoSoGietMo
 
         private void kháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AppCommon.AddFormToMdiParent(new QuanLyDanhMucDoiTuongForm(), this);
         }
 
         private void sảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AppCommon.AddFormToMdiParent(new QuanLyDanhMucSanPhamForm(), this);
         }
 
         private void thốngKêToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void nạpNhanhDữLiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AppCommon.AddFormToMdiParent(new NhapXuatDuLieuForm(), this);
+        }
+
+        private void thốngKêToolStripMenuItem2_Click(object sender, EventArgs e)
         {
 
         }
