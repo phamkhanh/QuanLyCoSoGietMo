@@ -94,7 +94,7 @@
             this.btnNapDanhMucTheoNgay.BackColor = System.Drawing.Color.Green;
             this.btnNapDanhMucTheoNgay.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNapDanhMucTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnNapDanhMucTheoNgay.Location = new System.Drawing.Point(265, 169);
+            this.btnNapDanhMucTheoNgay.Location = new System.Drawing.Point(48, 169);
             this.btnNapDanhMucTheoNgay.Name = "btnNapDanhMucTheoNgay";
             this.btnNapDanhMucTheoNgay.Size = new System.Drawing.Size(211, 70);
             this.btnNapDanhMucTheoNgay.TabIndex = 10;
@@ -107,7 +107,7 @@
             this.btnNapDuLieuTheoNgay.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnNapDuLieuTheoNgay.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNapDuLieuTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnNapDuLieuTheoNgay.Location = new System.Drawing.Point(48, 169);
+            this.btnNapDuLieuTheoNgay.Location = new System.Drawing.Point(265, 169);
             this.btnNapDuLieuTheoNgay.Name = "btnNapDuLieuTheoNgay";
             this.btnNapDuLieuTheoNgay.Size = new System.Drawing.Size(211, 70);
             this.btnNapDuLieuTheoNgay.TabIndex = 11;

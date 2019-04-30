@@ -112,6 +112,10 @@
     </Compile>
     <Compile Include="AppSupport\AppCommon.cs" />
     <Compile Include="AppSupport\AppMsg.cs" />
+    <Compile Include="AppSupport\Const\NhatKyNhapHangConst.cs" />
+    <Compile Include="AppSupport\Const\NhatKyThuChiConst.cs" />
+    <Compile Include="AppSupport\Const\NhatKyVanChuyenConst.cs" />
+    <Compile Include="AppSupport\SheetChiPhiVanChuyenColumn.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +124,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AppSupport\SheetSoThuChiColumn.cs" />
     <EmbeddedResource Include="AppForm\NhapXuatDuLieuForm.resx">
       <DependentUpon>NhapXuatDuLieuForm.cs</DependentUpon>
     </EmbeddedResource>
