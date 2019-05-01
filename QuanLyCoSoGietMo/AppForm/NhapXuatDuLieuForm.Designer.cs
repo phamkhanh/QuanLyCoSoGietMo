@@ -39,6 +39,7 @@
             this.lbMsgExcelToCSDL = new System.Windows.Forms.Label();
             this.doiTuongTableAdapter = new QuanLyCoSoGietMo.AppData.AppDataSetTableAdapters.DoiTuongTableAdapter();
             this.sanPhamTableAdapter = new QuanLyCoSoGietMo.AppData.AppDataSetTableAdapters.SanPhamTableAdapter();
+            this.nguoiVanChuyenTableAdapter = new QuanLyCoSoGietMo.AppData.AppDataSetTableAdapters.NguoiVanChuyenTableAdapter();
             this.panelTitle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,7 +95,7 @@
             this.btnNapDanhMucTheoNgay.BackColor = System.Drawing.Color.Green;
             this.btnNapDanhMucTheoNgay.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNapDanhMucTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnNapDanhMucTheoNgay.Location = new System.Drawing.Point(48, 169);
+            this.btnNapDanhMucTheoNgay.Location = new System.Drawing.Point(6, 159);
             this.btnNapDanhMucTheoNgay.Name = "btnNapDanhMucTheoNgay";
             this.btnNapDanhMucTheoNgay.Size = new System.Drawing.Size(211, 70);
             this.btnNapDanhMucTheoNgay.TabIndex = 10;
@@ -107,7 +108,7 @@
             this.btnNapDuLieuTheoNgay.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnNapDuLieuTheoNgay.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNapDuLieuTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnNapDuLieuTheoNgay.Location = new System.Drawing.Point(265, 169);
+            this.btnNapDuLieuTheoNgay.Location = new System.Drawing.Point(223, 159);
             this.btnNapDuLieuTheoNgay.Name = "btnNapDuLieuTheoNgay";
             this.btnNapDuLieuTheoNgay.Size = new System.Drawing.Size(211, 70);
             this.btnNapDuLieuTheoNgay.TabIndex = 11;
@@ -120,7 +121,7 @@
             this.btnMoExcelTheoNgay.BackColor = System.Drawing.Color.Gold;
             this.btnMoExcelTheoNgay.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoExcelTheoNgay.ForeColor = System.Drawing.Color.Red;
-            this.btnMoExcelTheoNgay.Location = new System.Drawing.Point(265, 93);
+            this.btnMoExcelTheoNgay.Location = new System.Drawing.Point(223, 83);
             this.btnMoExcelTheoNgay.Name = "btnMoExcelTheoNgay";
             this.btnMoExcelTheoNgay.Size = new System.Drawing.Size(211, 70);
             this.btnMoExcelTheoNgay.TabIndex = 12;
@@ -133,7 +134,7 @@
             this.btnMoFileExcelMau.BackColor = System.Drawing.Color.Red;
             this.btnMoFileExcelMau.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoFileExcelMau.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnMoFileExcelMau.Location = new System.Drawing.Point(48, 93);
+            this.btnMoFileExcelMau.Location = new System.Drawing.Point(6, 83);
             this.btnMoFileExcelMau.Name = "btnMoFileExcelMau";
             this.btnMoFileExcelMau.Size = new System.Drawing.Size(211, 70);
             this.btnMoFileExcelMau.TabIndex = 13;
@@ -145,7 +146,7 @@
             // 
             this.lbMsgExcelToCSDL.AutoSize = true;
             this.lbMsgExcelToCSDL.Font = new System.Drawing.Font("Segoe UI Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMsgExcelToCSDL.Location = new System.Drawing.Point(223, 50);
+            this.lbMsgExcelToCSDL.Location = new System.Drawing.Point(1, 232);
             this.lbMsgExcelToCSDL.Name = "lbMsgExcelToCSDL";
             this.lbMsgExcelToCSDL.Size = new System.Drawing.Size(0, 25);
             this.lbMsgExcelToCSDL.TabIndex = 16;
@@ -159,11 +160,15 @@
             // 
             this.sanPhamTableAdapter.ClearBeforeFill = true;
             // 
+            // nguoiVanChuyenTableAdapter
+            // 
+            this.nguoiVanChuyenTableAdapter.ClearBeforeFill = true;
+            // 
             // NhapXuatDuLieuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 248);
+            this.ClientSize = new System.Drawing.Size(523, 297);
             this.Controls.Add(this.lbMsgExcelToCSDL);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpNgayNhapDuLieu);
@@ -194,5 +199,6 @@
         private System.Windows.Forms.Label lbMsgExcelToCSDL;
         private AppData.AppDataSetTableAdapters.DoiTuongTableAdapter doiTuongTableAdapter;
         private AppData.AppDataSetTableAdapters.SanPhamTableAdapter sanPhamTableAdapter;
+        private AppData.AppDataSetTableAdapters.NguoiVanChuyenTableAdapter nguoiVanChuyenTableAdapter;
     }
 }

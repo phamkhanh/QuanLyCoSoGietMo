@@ -102,6 +102,7 @@ namespace QuanLyCoSoGietMo.AppSupport
 
             if (!_isExisted)
             {
+                frm.FormBorderStyle = FormBorderStyle.None;
                 frm.MdiParent = mdiParent;
                 frm.WindowState = FormWindowState.Maximized;
                 frm.ControlBox = false;

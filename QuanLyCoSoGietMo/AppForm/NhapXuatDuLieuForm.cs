@@ -47,7 +47,6 @@ namespace QuanLyCoSoGietMo.AppForm
         public NhapXuatDuLieuForm()
         {
             InitializeComponent();
-            dtpNgayNhapDuLieu.Value = new DateTime(2019, 4, 28);
         }
 
         private void btnMoFileExcelMau_Click(object sender, EventArgs e)
@@ -102,6 +101,10 @@ namespace QuanLyCoSoGietMo.AppForm
             sanPhamTableAdapter.ClearBeforeFill = true;
             sanPhamTableAdapter.Fill(sanPhamTable);
 
+            NguoiVanChuyenDataTable nguoiVanChuyenTable = new NguoiVanChuyenDataTable();
+            nguoiVanChuyenTableAdapter.ClearBeforeFill = true;
+            nguoiVanChuyenTableAdapter.Fill(nguoiVanChuyenTable,"");
+
             using (var workbook = new XLWorkbook(ExcelTemplatePath))
             {
                 var workSheetDoiTuong = workbook.Worksheet("DoiTuong");
@@ -111,6 +114,17 @@ namespace QuanLyCoSoGietMo.AppForm
                 {
                     workSheetDoiTuong.Cell(String.Format("A{0}", indexRowStart)).Value = row["TenDoiTuong"];
                     workSheetDoiTuong.Cell(String.Format("B{0}", indexRowStart)).Value = row["Id"];
+
+                    indexRowStart++;
+                }
+
+                var workSheetNguoiVanChuyen = workbook.Worksheet("NguoiVanChuyen");
+                indexRowStart = 2;
+
+                foreach (DataRow row in nguoiVanChuyenTable.Rows)
+                {
+                    workSheetNguoiVanChuyen.Cell(String.Format("A{0}", indexRowStart)).Value = row["TenNguoiVanChuyen"];
+                    workSheetNguoiVanChuyen.Cell(String.Format("B{0}", indexRowStart)).Value = row["Id"];
 
                     indexRowStart++;
                 }
@@ -137,6 +151,17 @@ namespace QuanLyCoSoGietMo.AppForm
                 {
                     workSheetDoiTuong.Cell(String.Format("A{0}", indexRowStart)).Value = row["TenDoiTuong"];
                     workSheetDoiTuong.Cell(String.Format("B{0}", indexRowStart)).Value = row["Id"];
+                    indexRowStart++;
+                }
+
+                var workSheetNguoiVanChuyen = workbook.Worksheet("NguoiVanChuyen");
+                indexRowStart = 2;
+
+                foreach (DataRow row in nguoiVanChuyenTable.Rows)
+                {
+                    workSheetNguoiVanChuyen.Cell(String.Format("A{0}", indexRowStart)).Value = row["TenNguoiVanChuyen"];
+                    workSheetNguoiVanChuyen.Cell(String.Format("B{0}", indexRowStart)).Value = row["Id"];
+
                     indexRowStart++;
                 }
 
@@ -176,54 +201,53 @@ namespace QuanLyCoSoGietMo.AppForm
             {
                 int countRow = 0; // đếm dòng bị lỗi trong excel
                 int countError = 0; // đếm lỗi
-
-                using (var workbook = new XLWorkbook(ExcelPath))
+                try
                 {
-                    NhatKyThuChiTableAdapter thuChiTableAdapter = new NhatKyThuChiTableAdapter();
-                    NhatKyThuChiDataTable thuChiTable = new NhatKyThuChiDataTable();
-
-                    NhatKyVanChuyenTableAdapter vanChuyenTableAdapter = new NhatKyVanChuyenTableAdapter();
-                    NhatKyVanChuyenDataTable vanChuyenTable = new NhatKyVanChuyenDataTable();
-
-                    NhatKyNhapHangTableAdapter nhapHangTableAdapter = new NhatKyNhapHangTableAdapter();
-                    NhatKyNhapHangDataTable nhapHangTable = new NhatKyNhapHangDataTable();
-
-                    DataRow dataRow;
-
-                    var wsSoThuChi = workbook.Worksheet("SoThuChi");
-                    var wsChiPhiVanChuyen = workbook.Worksheet("ChiPhiVanChuyen");
-
-                    var rowsSoThuChi = wsSoThuChi.RangeUsed().RowsUsed().Skip(10); // Skip header row
-                    var rowsChiPhiVanChuyen = wsChiPhiVanChuyen.RangeUsed().RowsUsed().Skip(1); // Skip header row
-
-                    int _nhatKyThuChiDoiTuongId;
-                    DateTime _nhatKyThuChiNgay;
-                    string _nhatKyThuChiNoiDung;
-                    decimal _nhatKyThuChiNo;
-                    decimal _nhatKyThuChiCo;
-
-                    int _nhatKyNhapHangThuongLaiId;
-                    int _nhatKyNhapHangNguoiVanChuyenId;
-                    int _nhatKyNhapHangSanPhamId;
-                    float _nhatKyNhapHangSoLuong;
-                    string _nhatKyNhapHangDiaChi;
-                    decimal _nhatKyNhapHangDonGia;
-                    decimal _nhatKyNhapHangThanhTien;
-                    int _nhatKyNhapHangDaThanhToan;
-
-                    int _nhatKyVanChuyenNguoiVanChuyenId;
-                    int _nhatKyVanChuyenSanPhamId;
-                    float _nhatKyVanChuyenSoLuong;
-                    decimal _nhatKyVanChuyenThanhTien;
-                    int _nhatKyVanChuyenDaThanhToan;
-                    string _nhatKyVanChuyenGhiChu;
-
-                    //------------------------------
-                    foreach (var row in rowsSoThuChi)
+                    using (var workbook = new XLWorkbook(ExcelPath))
                     {
-                        countRow++;
-                        try
+                        NhatKyThuChiTableAdapter thuChiTableAdapter = new NhatKyThuChiTableAdapter();
+                        NhatKyThuChiDataTable thuChiTable = new NhatKyThuChiDataTable();
+
+                        NhatKyVanChuyenTableAdapter vanChuyenTableAdapter = new NhatKyVanChuyenTableAdapter();
+                        NhatKyVanChuyenDataTable vanChuyenTable = new NhatKyVanChuyenDataTable();
+
+                        NhatKyNhapHangTableAdapter nhapHangTableAdapter = new NhatKyNhapHangTableAdapter();
+                        NhatKyNhapHangDataTable nhapHangTable = new NhatKyNhapHangDataTable();
+
+                        DataRow dataRow;
+
+                        var wsSoThuChi = workbook.Worksheet("SoThuChi");
+                        var wsChiPhiVanChuyen = workbook.Worksheet("ChiPhiVanChuyen");
+
+                        var rowsSoThuChi = wsSoThuChi.RangeUsed().RowsUsed().Skip(1); // Skip header row
+                        var rowsChiPhiVanChuyen = wsChiPhiVanChuyen.RangeUsed().RowsUsed().Skip(1); // Skip header row
+
+                        int _nhatKyThuChiDoiTuongId;
+                        DateTime _nhatKyThuChiNgay;
+                        string _nhatKyThuChiNoiDung;
+                        decimal _nhatKyThuChiNo;
+                        decimal _nhatKyThuChiCo;
+
+                        int _nhatKyNhapHangThuongLaiId;
+                        int _nhatKyNhapHangNguoiVanChuyenId;
+                        int _nhatKyNhapHangSanPhamId;
+                        float _nhatKyNhapHangSoLuong;
+                        string _nhatKyNhapHangDiaChi;
+                        decimal _nhatKyNhapHangDonGia;
+                        decimal _nhatKyNhapHangThanhTien;
+                        int _nhatKyNhapHangDaThanhToan;
+
+                        int _nhatKyVanChuyenNguoiVanChuyenId;
+                        int _nhatKyVanChuyenSanPhamId;
+                        float _nhatKyVanChuyenSoLuong;
+                        decimal _nhatKyVanChuyenThanhTien;
+                        int _nhatKyVanChuyenDaThanhToan;
+                        string _nhatKyVanChuyenGhiChu;
+
+                        //------------------------------
+                        foreach (var row in rowsSoThuChi)
                         {
+                            countRow++;
                             // validation
                             if (string.IsNullOrEmpty(row.Cell(SheetSoThuChiColumn.Ten).Value.ToString())) // kiểm tra giá trị cột TÊN
                             {
@@ -268,6 +292,15 @@ namespace QuanLyCoSoGietMo.AppForm
                                     _nhatKyNhapHangThanhTien = string.IsNullOrEmpty(row.Cell(SheetSoThuChiColumn.ThanhTien).Value.ToString()) ? 0 : AppCommon.AppDecimalParse(row.Cell(SheetSoThuChiColumn.ThanhTien).Value.ToString());
                                     _nhatKyNhapHangDaThanhToan = string.IsNullOrEmpty(row.Cell(SheetSoThuChiColumn.DaThanhToan).Value.ToString()) ? 1 : AppCommon.AppIntergerParse(row.Cell(SheetSoThuChiColumn.DaThanhToan).Value.ToString());
 
+                                    if (_nhatKyNhapHangThuongLaiId == 0 ||
+                                        _nhatKyNhapHangNguoiVanChuyenId == 0 ||
+                                        _nhatKyNhapHangSanPhamId == 0)
+                                    {
+                                        countError++; // lỗi tăng lên 1 đơn vị
+                                        AppMsg.Instance.Red(lbMsgExcelToCSDL, string.Format("300.  Lỗi nạp dữ liệu đến CSDL.\n ThuongLaiId, NguoiVanChuyenId, SanPhamId. Dòng {0}", countRow));
+                                        break;
+                                    }
+
                                     dataRow = nhapHangTable.NewRow();
                                     dataRow[NhatKyNhapHangConst.ThuongLaiId] = _nhatKyNhapHangThuongLaiId;
                                     dataRow[NhatKyNhapHangConst.NguoiVanChuyenId] = _nhatKyNhapHangNguoiVanChuyenId;
@@ -281,39 +314,79 @@ namespace QuanLyCoSoGietMo.AppForm
                                     nhapHangTable.Rows.Add(dataRow);
                                 }
                             }
-                            else
+                            _nhatKyThuChiDoiTuongId = AppCommon.AppIntergerParse(row.Cell(SheetSoThuChiColumn.DoiTuongId).Value.ToString());
+                            _nhatKyThuChiNgay = dtpNgayNhapDuLieu.Value;
+                            _nhatKyThuChiNoiDung = row.Cell(SheetSoThuChiColumn.NoiDung).Value.ToString();
+                            _nhatKyThuChiNo = AppCommon.AppDecimalParse(row.Cell(SheetSoThuChiColumn.No).Value.ToString());
+                            _nhatKyThuChiCo = AppCommon.AppDecimalParse(row.Cell(SheetSoThuChiColumn.Co).Value.ToString());
+
+                            if (_nhatKyThuChiDoiTuongId == 0)
                             {
-                                _nhatKyThuChiDoiTuongId = AppCommon.AppIntergerParse(row.Cell(SheetSoThuChiColumn.DoiTuongId).Value.ToString());
-                                _nhatKyThuChiNgay = dtpNgayNhapDuLieu.Value;
-                                _nhatKyThuChiNoiDung = row.Cell(SheetSoThuChiColumn.NoiDung).Value.ToString();
-                                _nhatKyThuChiNo = AppCommon.AppDecimalParse( row.Cell(SheetSoThuChiColumn.No).Value.ToString());
-                                _nhatKyThuChiCo = AppCommon.AppDecimalParse(row.Cell(SheetSoThuChiColumn.Co).Value.ToString());
-                                dataRow = thuChiTable.NewRow();
-                                dataRow[NhatKyThuChiConst.DoiTuongId] = _nhatKyThuChiDoiTuongId;
-                                dataRow[NhatKyThuChiConst.Ngay] = _nhatKyThuChiNgay;
-                                dataRow[NhatKyThuChiConst.NoiDung] = _nhatKyThuChiNoiDung;
-                                dataRow[NhatKyThuChiConst.No] = _nhatKyThuChiNo;
-                                dataRow[NhatKyThuChiConst.Co] = _nhatKyThuChiCo;
-                                thuChiTable.Rows.Add(dataRow);
+                                countError++; // lỗi tăng lên 1 đơn vị
+                                AppMsg.Instance.Red(lbMsgExcelToCSDL, string.Format("301. Lỗi nạp dữ liệu {1}, dòng số {0} đến CSDL.\n DoiTuongId.", countRow, wsSoThuChi.Name));
+                                break;
                             }
+
+                            dataRow = thuChiTable.NewRow();
+                            dataRow[NhatKyThuChiConst.DoiTuongId] = _nhatKyThuChiDoiTuongId;
+                            dataRow[NhatKyThuChiConst.Ngay] = _nhatKyThuChiNgay;
+                            dataRow[NhatKyThuChiConst.NoiDung] = _nhatKyThuChiNoiDung;
+                            dataRow[NhatKyThuChiConst.No] = _nhatKyThuChiNo;
+                            dataRow[NhatKyThuChiConst.Co] = _nhatKyThuChiCo;
+                            thuChiTable.Rows.Add(dataRow);
                         }
-                        catch (Exception ex)
+
+                        foreach (var row in rowsChiPhiVanChuyen)
                         {
-                            countError++; // lỗi tăng lên 1 đơn vị
-                            AppMsg.Instance.Red(lbMsgExcelToCSDL, "Lỗi nạp dữ liệu đến CSDL.\n" + ex.ToString());
-                            break;
+                            _nhatKyVanChuyenNguoiVanChuyenId = AppCommon.AppIntergerParse(row.Cell(SheetChiPhiVanChuyenColumn.NguoiVanChuyenId).Value.ToString());
+                            _nhatKyVanChuyenSanPhamId = AppCommon.AppIntergerParse(row.Cell(SheetChiPhiVanChuyenColumn.SanPhamId).Value.ToString());
+                            _nhatKyVanChuyenSoLuong = AppCommon.AppFloatParse(row.Cell(SheetChiPhiVanChuyenColumn.SoLuong).Value.ToString());
+                            _nhatKyVanChuyenThanhTien = AppCommon.AppDecimalParse(row.Cell(SheetChiPhiVanChuyenColumn.ThanhTien).Value.ToString());
+                            _nhatKyVanChuyenDaThanhToan = AppCommon.AppIntergerParse(row.Cell(SheetChiPhiVanChuyenColumn.DaThanhToan).Value.ToString());
+                            _nhatKyVanChuyenGhiChu = row.Cell(SheetChiPhiVanChuyenColumn.GhiChu).Value.ToString();
+
+                            if (_nhatKyVanChuyenNguoiVanChuyenId == 0 ||
+                                _nhatKyVanChuyenSanPhamId == 0)
+                            {
+                                countError++; // lỗi tăng lên 1 đơn vị
+                                AppMsg.Instance.Red(lbMsgExcelToCSDL, string.Format("302. Lỗi nạp dữ liệu {1}, dòng số {0} đến CSDL.\n DoiTuongId, SanPhamId.", countRow, wsChiPhiVanChuyen.Name));
+                                break;
+                            }
+
+                            dataRow = vanChuyenTable.NewRow();
+                            dataRow[NhatKyVanChuyenConst.NguoiVanChuyenId] = _nhatKyVanChuyenNguoiVanChuyenId;
+                            dataRow[NhatKyVanChuyenConst.SanPhamId] = _nhatKyVanChuyenSanPhamId;
+                            dataRow[NhatKyVanChuyenConst.SoLuong] = _nhatKyVanChuyenSoLuong;
+                            dataRow[NhatKyVanChuyenConst.ThanhTien] = _nhatKyVanChuyenThanhTien;
+                            dataRow[NhatKyVanChuyenConst.DaThanhToan] = _nhatKyVanChuyenDaThanhToan;
+                            dataRow[NhatKyVanChuyenConst.GhiChu] = _nhatKyVanChuyenGhiChu;
+                            vanChuyenTable.Rows.Add(dataRow);
                         }
+
+                        if (countError > 0) return; // nếu có lỗi thì không chạy dòng code bên dưới
+                                                    //thuChiTableAdapter.ThuChiDeleteByNgayChi(DateTime.Parse(NgayNhapDuLieu.ToShortDateString()), DateTime.Parse(NgayNhapDuLieu.ToShortDateString() + " 11:59:59 PM"));
+
+                        thuChiTableAdapter.v3_sp_delete_NhatKyThuChi_ByNgay(DateTime.Parse(NgayNhapDuLieu.ToShortDateString()));
+                        nhapHangTableAdapter.v3_sp_delete_NhatKyNhapHang_ByNgayNhap(DateTime.Parse(NgayNhapDuLieu.ToShortDateString()));
+                        vanChuyenTableAdapter.v3_sp_delete_NhatKyVanChuyen_byNhatKyVanChuyen(DateTime.Parse(NgayNhapDuLieu.ToShortDateString()));
+                        nhapHangTableAdapter.Update(nhapHangTable);
+                        thuChiTableAdapter.Update(thuChiTable);
+                        vanChuyenTableAdapter.Update(vanChuyenTable);
+                        AppMsg.Instance.Green(lbMsgExcelToCSDL, "Cập nhật dữ liệu thành công");
+                        //------------------------------
                     }
-
-                    if (countError > 0) return; // nếu có lỗi thì không chạy dòng code bên dưới
-                                                //thuChiTableAdapter.ThuChiDeleteByNgayChi(DateTime.Parse(NgayNhapDuLieu.ToShortDateString()), DateTime.Parse(NgayNhapDuLieu.ToShortDateString() + " 11:59:59 PM"));
-
-                    thuChiTableAdapter.v3_sp_delete_NhatKyThuChi_ByNgay(DateTime.Parse(NgayNhapDuLieu.ToShortDateString()));
-                    nhapHangTableAdapter.v3_sp_delete_NhatKyNhapHang_ByNgayNhap(DateTime.Parse(NgayNhapDuLieu.ToShortDateString()));
-                    nhapHangTableAdapter.Update(nhapHangTable);
-                    thuChiTableAdapter.Update(thuChiTable);
-                    AppMsg.Instance.Green(lbMsgExcelToCSDL, "Cập nhật dữ liệu thành công");
-                    //------------------------------
+                }
+                catch (Exception ex)
+                {
+                    countError++; // lỗi tăng lên 1 đơn vị
+                    if (ex.Message.Contains("because it is being used by another process."))
+                    {
+                        AppMsg.Instance.Red(lbMsgExcelToCSDL, "File đang mở. Vui lòng lưu và đóng file lại.");
+                    }
+                    else
+                    {
+                        AppMsg.Instance.Red(lbMsgExcelToCSDL, "Lỗi nạp dữ liệu đến CSDL.\n" + ex.ToString());
+                    }
                 }
             }
         }
